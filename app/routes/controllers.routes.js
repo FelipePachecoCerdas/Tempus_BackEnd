@@ -413,9 +413,7 @@ module.exports = app => {
   
     // Eliminar todos los tareas
     automaticTaskRouter.delete("/", tarea_automatica.deleteAll);
-
-    automaticTaskRouter.get("/id_tarea/:id_tarea",tarea_automatica.findByTaskId);
-
+    
     automaticTaskRouter.post("/consulta",tarea_automatica.consulta);
   
     app.use('/api/tarea_automatica', automaticTaskRouter);
