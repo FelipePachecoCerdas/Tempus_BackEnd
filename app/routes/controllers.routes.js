@@ -414,6 +414,8 @@ module.exports = app => {
     // Eliminar todos los tareas
     automaticTaskRouter.delete("/", tarea_automatica.deleteAll);
 
+    automaticTaskRouter.get("/id_tarea/:id_tarea",tarea_automatica.findByTaskId);
+
     automaticTaskRouter.post("/consulta",tarea_automatica.consulta);
   
     app.use('/api/tarea_automatica', automaticTaskRouter);
@@ -428,13 +430,15 @@ module.exports = app => {
     taskPeriodRouter.get("/", tarea_periodo.findAll);
 
     // Retornar tarea_periodo que tenga esa id
-    taskPeriodRouter.get("/id_tarea/:id_tarea", tarea_periodo.findByPk);
+    taskPeriodRouter.get("/id_tarea/:id_tarea/fecha_inicial/:fecha_hora_inicio_original/fecha_final/:fecha_hora_final_original", tarea_periodo.findByPk);
   
     // Actualizar por id
-    taskPeriodRouter.put("/id_tarea/:id_tarea", tarea_periodo.update);
+    taskPeriodRouter.put("/id_tarea/:id_tarea/fecha_inicial/:fecha_hora_inicio_original/fecha_final/:fecha_hora_final_original", tarea_periodo.update);
   
     // Eliminar por id
-    taskPeriodRouter.delete("/id_tarea/:id_tarea", tarea_periodo.delete);
+    taskPeriodRouter.delete("/id_tarea/:id_tarea/fecha_inicial/:fecha_hora_inicio_original/fecha_final/:fecha_hora_final_original", tarea_periodo.delete);
+
+    taskPeriodRouter.get("/id_tarea/:id_tarea",tarea_periodo.findByTaskId);
   
     // Eliminar todos los tareas
     taskPeriodRouter.delete("/", tarea_periodo.deleteAll);

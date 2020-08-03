@@ -28,9 +28,25 @@ exports.create = (req, res) => {
   };
 
   //Retornar tarea_periodo buscando por Pk-->Está mala(Crear una solo para id_tarea***)
+  exports.findByTaskId =  async (req, res) => {
+    const id_tarea = req.params.id_tarea;
+    Tarea_periodo.findAll({where: { id_tarea:id_tarea}})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error al retornar el tarea_periodo con id: " + id_tarea
+        });
+      });
+  };
+
+  //Retornar tarea_periodo buscando por Pk-->Está mala(Crear una solo para id_tarea***)
   exports.findByPk =  async (req, res) => {
     const id_tarea = req.params.id_tarea;
-    Tarea_periodo.findByPk(id_tarea)
+    const fecha_hora_final_original = req.params.fecha_hora_final_original;
+    const fecha_hora_inicio_original = req.params.fecha_hora_inicio_original;
+    Tarea_periodo.findOne({where: { id_tarea: id_tarea, fecha_hora_inicio_original:fecha_hora_inicio_original, fecha_hora_final_original: fecha_hora_final_original }})
       .then(data => {
         res.send(data);
       })
@@ -74,7 +90,9 @@ exports.create = (req, res) => {
   //actualizar tarea_periodo
   exports.update = (req, res) => {
     const id_tarea = req.params.id_tarea;
-    Tarea_periodo.update(req.body, {where: { id_tarea: id_tarea }})
+    const fecha_hora_final_original = req.params.fecha_hora_final_original;
+    const fecha_hora_inicio_original = req.params.fecha_hora_inicio_original;
+    Tarea_periodo.update(req.body, {where: { id_tarea: id_tarea, fecha_hora_inicio_original:fecha_hora_inicio_original, fecha_hora_final_original: fecha_hora_final_original }})
       .then(num => {
         (num == 1) ? res.send({message: "Completado con éxito"})
           : res.send({message: `No se puede actualizar el tarea_periodo que tiene la id: ${id_tarea}`});
@@ -87,7 +105,9 @@ exports.create = (req, res) => {
   //eliminar tarea_periodo
   exports.delete = (req, res) => {
     const id_tarea = req.params.id_tarea;
-    Tarea_periodo.destroy({where: { id_tarea: id_tarea }})
+    const fecha_hora_final_original = req.params.fecha_hora_final_original;
+    const fecha_hora_inicio_original = req.params.fecha_hora_inicio_original;
+    Tarea_periodo.destroy({where: { id_tarea: id_tarea, fecha_hora_inicio_original:fecha_hora_inicio_original, fecha_hora_final_original: fecha_hora_final_original }})
       .then(num => {
         (num == 1) ? res.send({message: "Completado con éxito"})
           : res.send({message: `No se puede eliminar el tarea_periodo que tiene la id: ${id_tarea}`});

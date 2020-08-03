@@ -46,6 +46,19 @@ exports.create = (req, res) => {
       });
   };
 
+  exports.findByTaskId =  async (req, res) => {
+    const id_tarea = req.params.id_tarea;
+    Tarea_automatica.findAll({where: { id_tarea:id_tarea}})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error al retornar el tarea_automatica con id: " + id_tarea
+        });
+      });
+  };
+
   //Realiza la consulta solicitada
   exports.consulta =  async (req, res) => {
     const consulta = req.body.consulta;
