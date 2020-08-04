@@ -56,7 +56,8 @@ exports.create = (req, res) => {
   //Retornar todos los proyectos.
   exports.findAll = (req, res) => {
   
-    Proyecto.findAll({ where:{} })
+    Proyecto.findAll({ where:{},order:
+      [['id_proyecto', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -79,9 +80,12 @@ exports.create = (req, res) => {
       });
   };
 
+
+
   //buscar proyecto por administrador_proyecto
   exports.findByProjectAdministrator = (req, res) => {
-    Proyecto.findAll({ where: { administrador_proyecto: req.params.administrador_proyecto } })
+    Proyecto.findAll({ where: { administrador_proyecto: req.params.administrador_proyecto },order:
+      [['id_proyecto', 'ASC']]  })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({

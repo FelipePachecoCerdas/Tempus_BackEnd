@@ -63,7 +63,8 @@ exports.create = (req, res) => {
   // Retornar todos los tareas
   exports.findAll = (req, res) => {
 
-    Tarea.findAll({ where:{} })
+    Tarea.findAll({ where:{},order:
+      [['id_tarea', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -77,7 +78,8 @@ exports.create = (req, res) => {
 
   //buscar tarea por nombre
   exports.findByName = (req, res) => {
-    Tarea.findAll({ where: { nombre_tarea: req.params.nombre_tarea } })
+    Tarea.findAll({ where: { nombre_tarea: req.params.nombre_tarea },order:
+      [['id_tarea', 'ASC']]  })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({

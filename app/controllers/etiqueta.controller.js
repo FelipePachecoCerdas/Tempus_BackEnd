@@ -56,7 +56,8 @@ exports.create = (req, res) => {
   //Retornar todos las etiqueta.
   exports.findAll = (req, res) => {
   
-    Etiqueta.findAll({ where: {} })
+    Etiqueta.findAll({ where: {},order:
+      [['nombre_etiqueta', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -70,7 +71,8 @@ exports.create = (req, res) => {
 
   //buscar etiqueta por id_usuario
   exports.findByUserId = (req, res) => {
-    Etiqueta.findAll({ where: { id_usuario: req.params.id_usuario } })
+    Etiqueta.findAll({ where: { id_usuario: req.params.id_usuario },order:
+      [['nombre_etiqueta', 'ASC']] })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({

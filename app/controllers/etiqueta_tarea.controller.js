@@ -58,7 +58,8 @@ Etiqueta_tarea.create(etiqueta_tarea)
   //Retornar todos los etiqueta_tarea.
   exports.findAll = (req, res) => {
   
-    Etiqueta_tarea.findAll({ where: {} })
+    Etiqueta_tarea.findAll({ where: {},order:
+      [['nombre_etiqueta', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -72,7 +73,8 @@ Etiqueta_tarea.create(etiqueta_tarea)
 
   //buscar etiqueta_tarea por id_usuario
   exports.findByUserId = (req, res) => {
-    Etiqueta_tarea.findAll({ where: { id_usuario: req.params.id_usuario } })
+    Etiqueta_tarea.findAll({ where: { id_usuario: req.params.id_usuario },order:
+      [['nombre_etiqueta', 'ASC']] })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({

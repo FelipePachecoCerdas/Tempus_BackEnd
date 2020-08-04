@@ -63,7 +63,8 @@ exports.create = (req, res) => {
   // Retornar todos los tareas
   exports.findAll = (req, res) => {
 
-    Tarea_automatica.findAll({ where:{} })
+    Tarea_automatica.findAll({ where:{},order:
+      [['id_tarea', 'ASC']]  })
       .then(data => {
         res.send(data);
       })

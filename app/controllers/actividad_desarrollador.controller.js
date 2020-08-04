@@ -56,7 +56,8 @@ exports.create = (req, res) => {
   //Retornar todos los actividad_desarrollador.
   exports.findAll = (req, res) => {
   
-    Actividad_desarrollador.findAll({ where: {} })
+    Actividad_desarrollador.findAll({ where: {},order:
+      [['id_actividad_desarrollador', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -71,7 +72,8 @@ exports.create = (req, res) => {
 
   //buscar actividad_desarrollador por id_proyecto
   exports.findByProjectId = (req, res) => {
-    Actividad_desarrollador.findAll({ where: { id_proyecto: req.params.id_proyecto } })
+    Actividad_desarrollador.findAll({ where: { id_proyecto: req.params.id_proyecto },order:
+      [['id_proyecto', 'ASC']] })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({

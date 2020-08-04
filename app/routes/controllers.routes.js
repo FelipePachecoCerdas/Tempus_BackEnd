@@ -30,7 +30,10 @@ module.exports = app => {
   
     // Retornar usuario que tenga esa id
     userRouter.get("/id_usuario/:id_usuario", usuario.findByPk);
-  
+
+    //Retornar usuario por correo_electronico
+    userRouter.get("/correo_electronico/:correo_electronico", usuario.findByEmail);
+
     // Actualizar por id
     userRouter.put("/id_usuario/:id_usuario", usuario.update);
   
@@ -92,6 +95,8 @@ module.exports = app => {
     // Retornar el interesado_proyecto por id_proyecto
     stakeholderProjectRouter.get("/id_proyecto/:id_proyecto", interesado_proyecto.findByProjectId);
 
+    stakeholderProjectRouter.get("/id_interesado/:id_interesado",interesado_proyecto.findByStakeholderId);
+
     // Actualizar interesado_proyecto por id
     stakeholderProjectRouter.put("/id_proyecto/:id_proyecto/id_interesado/:id_interesado", interesado_proyecto.update);
   
@@ -122,6 +127,9 @@ module.exports = app => {
 
     // Retornar el desarrollador_proyecto por id_proyecto
     developerProjectRouter.get("/id_proyecto/:id_proyecto", desarrollador_proyecto.findByProjectId);
+
+    // Retornar el desarrollador_proyecto por id_proyecto
+    developerProjectRouter.get("/id_desarrollador/:id_desarrollador", desarrollador_proyecto.findByDeveloperId);
 
     // Actualizar desarrollador_proyecto por id
     developerProjectRouter.put("/id_proyecto/:id_proyecto/id_desarrollador/:id_desarrollador", desarrollador_proyecto.update);

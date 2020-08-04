@@ -56,7 +56,8 @@ exports.create = (req, res) => {
   //Retornar todos los interesados_proyecto.
   exports.findAll = (req, res) => {
   
-    Interesado_proyecto.findAll({ where: {} })
+    Interesado_proyecto.findAll({ where: {},order:
+      [['id_interesado', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -81,7 +82,19 @@ exports.create = (req, res) => {
 
   //buscar interesados_proyecto por id_proyecto
   exports.findByProjectId = (req, res) => {
-    Interesado_proyecto.findAll({ where: { id_proyecto: req.params.id_proyecto } })
+    Interesado_proyecto.findAll({ where: { id_proyecto: req.params.id_proyecto },order:
+      [['id_proyecto', 'ASC']] })
+      .then(data => {res.send(data);})
+      .catch(err => {
+        res.status(500).send({
+          message: err.message || "Error al buscar interesados_proyecto por id_proyecto."
+        });
+      });
+  };
+
+  exports.findByStakeholderId = (req, res) => {
+    Interesado_proyecto.findAll({ where: { id_interesado: req.params.id_interesado },order:
+      [['id_proyecto', 'ASC']] })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({

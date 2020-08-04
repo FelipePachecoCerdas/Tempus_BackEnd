@@ -56,7 +56,8 @@ exports.create = (req, res) => {
   //Retornar todos los desarrolladores_proyecto.
   exports.findAll = (req, res) => {
   
-    Desarrollador_proyecto.findAll({ where: {} })
+    Desarrollador_proyecto.findAll({ where: {},order:
+      [['id_desarrollador', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -81,7 +82,8 @@ exports.create = (req, res) => {
 
 //buscar desarrolladores_proyecto por id_proyecto
 exports.findByProjectId = (req, res) => {
-    Desarrollador_proyecto.findAll({ where: { id_proyecto: req.params.id_proyecto } })
+    Desarrollador_proyecto.findAll({ where: { id_proyecto: req.params.id_proyecto },order:
+      [['id_proyecto', 'ASC']] })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({
@@ -89,6 +91,18 @@ exports.findByProjectId = (req, res) => {
         });
       });
   };
+
+  //buscar desarrolladores_proyecto por id_proyecto
+exports.findByDeveloperId = (req, res) => {
+  Desarrollador_proyecto.findAll({ where: { id_desarrollador: req.params.id_desarrollador },order:
+    [['id_proyecto', 'ASC']] })
+    .then(data => {res.send(data);})
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || "Error al buscar desarrolladores_proyecto por id_proyecto."
+      });
+    });
+};
 
 
   //actualizar desarrollador_proyecto

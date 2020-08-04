@@ -55,7 +55,8 @@ exports.create = (req, res) => {
   // Retornar todos los usuarios
   exports.findAll = (req, res) => {
 
-    Horario_especifico_por_dia.findAll({ where:{} })
+    Horario_especifico_por_dia.findAll({ where:{},order:
+      [['id_horario_especifico', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -69,7 +70,8 @@ exports.create = (req, res) => {
 
   //buscar horario_especifico_por_dia por id_horario_efectivo
   exports.findByEffectiveScheduleId = (req, res) => {
-    Horario_especifico_por_dia.findAll({ where: { id_horario_efectivo: req.params.id_horario_efectivo } })
+    Horario_especifico_por_dia.findAll({ where: { id_horario_efectivo: req.params.id_horario_efectivo },order:
+      [['id_horario_efectivo', 'ASC']] })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({

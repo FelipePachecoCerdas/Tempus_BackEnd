@@ -30,7 +30,8 @@ exports.create = (req, res) => {
   //Retornar tarea_periodo buscando por Pk-->Está mala(Crear una solo para id_tarea***)
   exports.findByTaskId =  async (req, res) => {
     const id_tarea = req.params.id_tarea;
-    Tarea_periodo.findAll({where: { id_tarea:id_tarea}})
+    Tarea_periodo.findAll({where: { id_tarea:id_tarea},order:
+      [['id_tarea', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -46,7 +47,8 @@ exports.create = (req, res) => {
     const id_tarea = req.params.id_tarea;
     const fecha_hora_final_original = req.params.fecha_hora_final_original;
     const fecha_hora_inicio_original = req.params.fecha_hora_inicio_original;
-    Tarea_periodo.findOne({where: { id_tarea: id_tarea, fecha_hora_inicio_original:fecha_hora_inicio_original, fecha_hora_final_original: fecha_hora_final_original }})
+    Tarea_periodo.findOne({where: { id_tarea: id_tarea, fecha_hora_inicio_original:fecha_hora_inicio_original, fecha_hora_final_original: fecha_hora_final_original },order:
+      [['id_tarea', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -74,7 +76,8 @@ exports.create = (req, res) => {
   // Retornar todos los tareas
   exports.findAll = (req, res) => {
 
-    Tarea_periodo.findAll({ where:{} })
+    Tarea_periodo.findAll({ where:{},order:
+      [['id_tarea', 'ASC']]  })
       .then(data => {
         res.send(data);
       })

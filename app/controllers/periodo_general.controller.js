@@ -58,7 +58,8 @@ exports.create = (req, res) => {
   //Retornar todos los periodos_generales.
   exports.findAll = (req, res) => {
   
-    Periodo_general.findAll({ where: {} })
+    Periodo_general.findAll({ where: {},order:
+      [['id_horario_general', 'ASC']]  })
       .then(data => {
         res.send(data);
       })
@@ -72,7 +73,8 @@ exports.create = (req, res) => {
 
   //buscar periodo_general por id_horario_general
   exports.findByGeneralScheduleId = (req, res) => {
-    Periodo_general.findAll({ where: { id_horario_general: req.params.id_horario_general } })
+    Periodo_general.findAll({ where: { id_horario_general: req.params.id_horario_general },order:
+      [['id_horario_general', 'ASC']] })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({

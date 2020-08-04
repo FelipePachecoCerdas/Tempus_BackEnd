@@ -58,7 +58,8 @@ exports.create = (req, res) => {
   // Retornar todos las actividades
   exports.findAll = (req, res) => {
 
-    Actividad.findAll({ where:{} })
+    Actividad.findAll({ where:{},order:
+      [['id_actividad', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -72,7 +73,8 @@ exports.create = (req, res) => {
 
   //buscar actividad por nombre
   exports.findByName = (req, res) => {
-    Actividad.findAll({ where: { nombre_actividad: req.params.nombre_actividad } })
+    Actividad.findAll({ where: { nombre_actividad: req.params.nombre_actividad },order:
+      [['id_actividad', 'ASC']] })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({
@@ -83,7 +85,8 @@ exports.create = (req, res) => {
 
   //buscar actividad por id_proyecto
   exports.findByProjectId = (req, res) => {
-    Actividad.findAll({ where: { id_proyecto: req.params.id_proyecto } })
+    Actividad.findAll({ where: { id_proyecto: req.params.id_proyecto },order:
+      [['id_proyecto', 'ASC']] })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({

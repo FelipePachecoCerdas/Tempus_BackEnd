@@ -58,7 +58,8 @@ exports.create = (req, res) => {
   //Retornar todos los periodos_especificos.
   exports.findAll = (req, res) => {
   
-    Periodo_especifico.findAll({ where: {} })
+    Periodo_especifico.findAll({ where: {},order:
+      [['id_horario_especifico', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -72,7 +73,8 @@ exports.create = (req, res) => {
 
   //buscar periodo_especifico por id_horario_especifico
   exports.findBySpecificScheduleId = (req, res) => {
-    Periodo_especifico.findAll({ where: { id_horario_especifico: req.params.id_horario_especifico } })
+    Periodo_especifico.findAll({ where: { id_horario_especifico: req.params.id_horario_especifico },order:
+      [['id_horario_especifico', 'ASC']] })
       .then(data => {res.send(data);})
       .catch(err => {
         res.status(500).send({

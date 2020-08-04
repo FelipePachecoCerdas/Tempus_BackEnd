@@ -33,9 +33,6 @@ exports.create = (req, res) => {
   //Retornar usuario buscando por Pk
   exports.findByPk =  async (req, res) => {
     const id_usuario = req.params.id_usuario;
-    console.log(req.params);
-    //const results = await  Usuario.sequelize.query("delete from public.usuario "+"where id_usuario = "+id_usuario);
-    //console.log(results[0][0]["nombre"]);
     Usuario.findByPk(id_usuario)
       .then(data => {
         res.send(data);
@@ -46,6 +43,18 @@ exports.create = (req, res) => {
         });
       });
   };
+
+  exports.findByEmail = (req, res) =>{
+    const correo_electronico = req.params.correo_electronico
+    Usuario.findOne({where:{correo_electronico:correo_electronico}}).then(
+      data=>{
+        res.send(data)
+      }).catch(err => {
+        res.status(500).send({
+          message: "Error al retornar el usuario con correo_electronico: " + correo_electronico
+        });
+      });
+  }
 
   //Realiza la consulta solicitada
   exports.consulta =  async (req, res) => {
@@ -64,7 +73,8 @@ exports.create = (req, res) => {
   // Retornar todos los usuarios
   exports.findAll = (req, res) => {
 
-    Usuario.findAll({ where:{} })
+    Usuario.findAll({ where:{},order:
+      [['id_usuario', 'ASC']] })
       .then(data => {
         res.send(data);
       })
