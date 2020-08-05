@@ -302,6 +302,8 @@ module.exports = app => {
     // Retornar el actividad_desarrollador por id_proyecto
     activityDeveloperRouter.get("/id_proyecto/:id_proyecto", actividad_desarrollador.findByProjectId);
 
+    activityDeveloperRouter.get("/id_proyecto/:id_proyecto/id_desarrollador/:id_desarrollador", actividad_desarrollador.findByProjectUserId)
+
     // Actualizar actividad_desarrollador por id
     activityDeveloperRouter.put("/id_actividad/:id_actividad/id_desarrollador/:id_desarrollador", actividad_desarrollador.update);
   
@@ -326,7 +328,13 @@ module.exports = app => {
   
     // Retornar tareas que cumplan el nombre
     taskRouter.get("/nombre_tarea/:nombre_tarea", tarea.findByName);
+
+    // Retornar tareas que cumplan el nombre
+    taskRouter.get("/id_usuario/:id_usuario", tarea.findByUserId);
   
+    // Retornar tareas que cumplan el nombre
+    taskRouter.get("/id_usuario/:id_usuario/id_actividad/:id_actividad_proyecto", tarea.findByUserActivityId);
+
     // Retornar tarea que tenga esa id
     taskRouter.get("/id_tarea/:id_tarea", tarea.findByPk);
   

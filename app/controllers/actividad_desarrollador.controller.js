@@ -57,7 +57,7 @@ exports.create = (req, res) => {
   exports.findAll = (req, res) => {
   
     Actividad_desarrollador.findAll({ where: {},order:
-      [['id_actividad_desarrollador', 'ASC']] })
+      [['id_actividad', 'ASC']] })
       .then(data => {
         res.send(data);
       })
@@ -82,6 +82,19 @@ exports.create = (req, res) => {
       });
   };
 
+  exports.findByProjectUserId = (req, res) => {
+    const id_proyecto = req.params.id_proyecto;
+    const id_desarrollador =req.params.id_desarrollador;
+    Actividad_desarrollador.findAll({where: { id_proyecto: id_proyecto,id_desarrollador:id_desarrollador }})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error al retornar la actividad_desarrollador con id_actividad: " + id_proyecto + " y con id_desarrollador: " + id_desarrollador
+        });
+      });
+  };
   //actualizar actividad_desarrollador
   exports.update = (req, res) => {
     const id_desarrollador = req.params.id_desarrollador;

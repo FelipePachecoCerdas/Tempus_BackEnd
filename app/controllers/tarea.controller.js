@@ -88,6 +88,32 @@ exports.create = (req, res) => {
       });
   };
 
+  //buscar tarea por nombre
+  exports.findByUserId = (req, res) => {
+    Tarea.findAll({ where: { id_usuario: req.params.id_usuario },order:
+      [['id_tarea', 'ASC']]  })
+      .then(data => {res.send(data);})
+      .catch(err => {
+        res.status(500).send({
+          message: err.message || "Error al buscar tareas por nombre."
+        });
+      });
+  };
+
+  exports.findByUserActivityId = (req, res) => {
+    const id_usuario = req.params.id_usuario;
+    const id_actividad_proyecto =req.params.id_actividad_proyecto;
+    Tarea.findAll({where: { id_usuario: id_usuario,id_actividad_proyecto:id_actividad_proyecto }})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error al retornar la actividad_desarrollador con id_actividad: " + id_usuario + " y con id_desarrollador: " + id_actividad
+        });
+      });
+  };
+
   //actualizar tarea
   exports.update = (req, res) => {
     const id_tarea = req.params.id_tarea;
