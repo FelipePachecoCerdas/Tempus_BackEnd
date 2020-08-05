@@ -103,7 +103,7 @@ exports.create = (req, res) => {
     const id_horario_especifico = req.params.id_horario_especifico;
     const minutos_tiempo_inicial=req.params.minutos_tiempo_inicial;
     const minutos_tiempo_finalizacion=req.params.minutos_tiempo_finalizacion;
-    Periodo_especifico.destroy(req.body, {where: { id_horario_especifico: id_horario_especifico, minutos_tiempo_inicial:minutos_tiempo_inicial, minutos_tiempo_finalizacion:minutos_tiempo_finalizacion }})
+    Periodo_especifico.destroy({where: { id_horario_especifico: id_horario_especifico, minutos_tiempo_inicial:minutos_tiempo_inicial, minutos_tiempo_finalizacion:minutos_tiempo_finalizacion }})
       .then(num => {
         (num == 1) ? res.send({message: "Completado con éxito"})
           : res.send({message: `No se puede eliminar el periodo_especifico con la id_horario_especifico: ${id_horario_especifico}, con minutos_tiempo_inicial: ${minutos_tiempo_inicial} y con minutos_tiempo_finalizacion: ${minutos_tiempo_finalizacion}`});

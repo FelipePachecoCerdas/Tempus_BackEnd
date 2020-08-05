@@ -103,7 +103,7 @@ Etiqueta_tarea.create(etiqueta_tarea)
     const id_usuario = req.params.id_usuario;
     const nombre_etiqueta=req.params.nombre_etiqueta;
     const id_tarea=req.params.id_tarea;
-    Etiqueta_tarea.destroy(req.body, {where: { id_usuario: id_usuario, nombre_etiqueta:nombre_etiqueta, id_tarea:id_tarea }})
+    Etiqueta_tarea.destroy( {where: { id_usuario: id_usuario, nombre_etiqueta:nombre_etiqueta, id_tarea:id_tarea }})
       .then(num => {
         (num == 1) ? res.send({message: "Completado con éxito"})
           : res.send({message: `No se puede eliminar el etiqueta_tarea con la id_usuario: ${id_usuario}, con nombre_etiqueta: ${nombre_etiqueta} y con id_tarea: ${id_tarea}`});
