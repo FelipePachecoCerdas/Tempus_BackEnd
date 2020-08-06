@@ -333,6 +333,9 @@ module.exports = app => {
     taskRouter.get("/id_usuario/:id_usuario", tarea.findByUserId);
   
     // Retornar tareas que cumplan el nombre
+    taskRouter.get("/id_actividad_proyecto/:id_actividad_proyecto", tarea.findByActivityId);
+
+    // Retornar tareas que cumplan el nombre
     taskRouter.get("/id_usuario/:id_usuario/id_actividad/:id_actividad_proyecto", tarea.findByUserActivityId);
 
     // Retornar tarea que tenga esa id

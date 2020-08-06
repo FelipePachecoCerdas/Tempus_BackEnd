@@ -100,6 +100,18 @@ exports.create = (req, res) => {
       });
   };
 
+  //buscar tarea por nombre
+  exports.findByActivityId = (req, res) => {
+    Tarea.findAll({ where: { id_actividad_proyecto: req.params.id_actividad_proyecto },order:
+      [['id_tarea', 'ASC']]  })
+      .then(data => {res.send(data);})
+      .catch(err => {
+        res.status(500).send({
+          message: err.message || "Error al buscar tareas por nombre."
+        });
+      });
+  };
+
   exports.findByUserActivityId = (req, res) => {
     const id_usuario = req.params.id_usuario;
     const id_actividad_proyecto =req.params.id_actividad_proyecto;
